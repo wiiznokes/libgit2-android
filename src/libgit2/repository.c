@@ -654,6 +654,11 @@ static int validate_ownership_path(bool *is_safe, const char *path)
 	return error;
 }
 
+#ifdef __ANDROID__
+static int validate_ownership(git_repository *repo) {
+	return 0;
+}
+#else
 static int validate_ownership(git_repository *repo)
 {
 	const char *validation_paths[3] = { NULL }, *path;
@@ -703,6 +708,8 @@ static int validate_ownership(git_repository *repo)
 done:
 	return error;
 }
+#endif
+
 
 struct repo_paths {
 	git_str gitdir;
