@@ -27,6 +27,7 @@ static int git_hash_openssl_global_init(void)
 {
 	if (!handle_count) {
 		if ((openssl_handle = dlopen("libssl.so.1.1", RTLD_NOW)) == NULL &&
+			(openssl_handle = dlopen("libssl.so", RTLD_NOW)) == NULL &&
 		    (openssl_handle = dlopen("libssl.1.1.dylib", RTLD_NOW)) == NULL &&
 		    (openssl_handle = dlopen("libssl.so.1.0.0", RTLD_NOW)) == NULL &&
 		    (openssl_handle = dlopen("libssl.1.0.0.dylib", RTLD_NOW)) == NULL &&
