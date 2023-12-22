@@ -1,6 +1,11 @@
 # Custom repo
 
-# Build
+# Add this repo to your project
+```
+git submodule add --depth 1 --branch patch-android -- https://github.com/wiiznokes/libgit2-android
+```
+
+# Build
 ```
 sudo apt install build-essential unzip cmake
 source ./build.sh
@@ -11,9 +16,7 @@ build_libgit2
 copy_libs $output_path
 ```
 
-To create submodules
 ```
-git submodule add --depth 1 --branch master -- https://github.com/openssl/openssl
-git submodule add --depth 1 --branch master -- https://github.com/libssh2/libssh2
+ls ./app/src/main/jniLibs/arm64-v8a/
+libcrypto.so  libgit2.so  libssh2.so  libssl.so
 ```
-
