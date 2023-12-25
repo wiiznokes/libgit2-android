@@ -111,5 +111,5 @@ all () {
     build_openssl
     build_libssh2
     build_libgit2
-    copy_libs ./../app/src/main/jniLibs/${ANDROID_ABI}/lib
+    copy_libs ./../app/src/main/jniLibs/${ANDROID_ABI}/
 }
