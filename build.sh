@@ -2,21 +2,22 @@
 
 
 export ANDROID_API=34
-export ANDROID_ABI=x86_64
+export ANDROID_ABI=arm64-v8a
 
 export LIBGI2_DIR=$(pwd)
 export OPENSSL_DIR=${LIBGI2_DIR}/openssl
 export LIBSSH2_DIR=${LIBGI2_DIR}/libssh2
 
+export ANDROID_NDK_ROOT=~/android-ndk-r26b/
+
 
 install_ndk() {
     wget https://dl.google.com/android/repository/android-ndk-r26b-linux.zip
-    sudo unzip ./android-ndk-r26b-linux.zip -d /opt
+    unzip ./android-ndk-r26b-linux.zip -d ~
 }
 
 build_openssl() {
     cd $OPENSSL_DIR
-    export ANDROID_NDK_ROOT=/opt/android-ndk-r26b/
     PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$PATH
 
     case $ANDROID_ABI in
@@ -64,7 +65,7 @@ build_libssh2() {
 
 build_libgit2() {
     cd $LIBGI2_DIR
-    make clean
+    #make clean
     rm -r build
     mkdir build && cd build
     find .. -name 'CMakeLists.txt' -exec sed -i 's|C_STANDARD 90|C_STANDARD 99|' {} \;
@@ -106,10 +107,11 @@ copy_libs() {
 
 all () {
 
-    export ANDROID_ABI=x86_64
 
     build_openssl
     build_libssh2
     build_libgit2
     copy_libs ./../app/src/main/jniLibs/${ANDROID_ABI}/
 }
+
+build_libgit2
