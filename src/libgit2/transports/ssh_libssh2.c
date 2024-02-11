@@ -539,6 +539,7 @@ static int _git_ssh_session_create(
 		return -1;
 	}
 
+	/*
 	if ((rc = load_known_hosts(&known_hosts, s)) < 0) {
 		ssh_error(s, "error loading known_hosts");
 		libssh2_session_free(s);
@@ -556,6 +557,7 @@ static int _git_ssh_session_create(
 		}
 	}
 	git_str_dispose(&prefs);
+	*/
 
 	do {
 		rc = libssh2_session_handshake(s, socket->s);
@@ -850,7 +852,10 @@ static int _git_ssh_setup_conn(
 			goto done;
 
 		if (strcmp(s->url.username, git_credential_get_username(cred))) {
-			git_error_set(GIT_ERROR_SSH, "username does not match previous request");
+			char error_message[256];
+			snprintf(error_message, sizeof(error_message), "username %s, does not match previous request %s\n", s->url.username, git_credential_get_username(cred));
+			
+			git_error_set(GIT_ERROR_SSH, error_message);
 			error = -1;
 			goto done;
 		}

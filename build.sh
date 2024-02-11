@@ -4,11 +4,13 @@
 export ANDROID_API=34
 export ANDROID_ABI=arm64-v8a
 
-export LIBGI2_DIR=$(pwd)
+export LIBGI2_DIR="$(pwd)"
 export OPENSSL_DIR=${LIBGI2_DIR}/openssl
 export LIBSSH2_DIR=${LIBGI2_DIR}/libssh2
 
 export ANDROID_NDK_ROOT=~/android-ndk-r26b/
+
+set -e
 
 
 install_ndk() {
@@ -39,7 +41,7 @@ build_openssl() {
         ;;
     esac
 
-    make clean
+    #make clean
     ./Configure $ANDROID_ABI_OPENSSL -D__ANDROID_API__=$ANDROID_API
     make
     cd ..
@@ -47,8 +49,8 @@ build_openssl() {
 
 build_libssh2() {
     cd $LIBSSH2_DIR
-    make clean
-    rm -r build
+    #make clean
+    rm -rf build
     mkdir build && cd build
     cmake .. \
     -DCMAKE_TOOLCHAIN_FILE=${LIBGI2_DIR}/android-toolchain.cmake \
@@ -66,7 +68,7 @@ build_libssh2() {
 build_libgit2() {
     cd $LIBGI2_DIR
     #make clean
-    rm -r build
+    rm -rf build
     mkdir build && cd build
     find .. -name 'CMakeLists.txt' -exec sed -i 's|C_STANDARD 90|C_STANDARD 99|' {} \;
     cmake .. \
@@ -114,4 +116,7 @@ all () {
     copy_libs ./../app/src/main/jniLibs/${ANDROID_ABI}/
 }
 
+
+#build_openssl
+#build_libssh2
 build_libgit2
