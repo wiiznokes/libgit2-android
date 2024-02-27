@@ -1,5 +1,7 @@
 #/bin/bash
 
+set -e
+
 
 export ANDROID_ABI=arm64-v8a
 export ANDROID_API=34
