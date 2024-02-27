@@ -10,7 +10,9 @@ export LIBGI2_DIR=$(pwd)
 export OPENSSL_DIR=${LIBGI2_DIR}/openssl
 export LIBSSH2_DIR=${LIBGI2_DIR}/libssh2
 
-JNI_LIBS_PATH=./../app/src/main/jniLibs/${ANDROID_ABI}/
+export ANDROID_NDK_ROOT=${LIBGI2_DIR}/android-ndk-r26b
+
+export JNI_LIBS_PATH=./../app/src/main/jniLibs/${ANDROID_ABI}/
 
 
 install_ndk() {
@@ -20,7 +22,6 @@ install_ndk() {
 
 build_openssl() {
     cd $OPENSSL_DIR
-    export ANDROID_NDK_ROOT=/opt/android-ndk-r26b/
     PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$PATH
 
     case $ANDROID_ABI in
@@ -110,10 +111,8 @@ copy_libs() {
 
 all () {
 
-    export ANDROID_ABI=x86_64
-
     build_openssl
     build_libssh2
     build_libgit2
-    copy_libs ./../app/src/main/jniLibs/${ANDROID_ABI}/
+    copy_libs $JNI_LIBS_PATH
 }
