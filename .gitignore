@@ -6,3 +6,6 @@
 CMakeSettings.json
 .vs
 .idea
+/android-ndk-r26b-linux.zip
+/android-ndk-r26b-linux
+/artifacts

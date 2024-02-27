@@ -1,17 +1,19 @@
 #/bin/bash
 
 
+export ANDROID_ABI=arm64-v8a
 export ANDROID_API=34
-export ANDROID_ABI=x86_64
 
 export LIBGI2_DIR=$(pwd)
 export OPENSSL_DIR=${LIBGI2_DIR}/openssl
 export LIBSSH2_DIR=${LIBGI2_DIR}/libssh2
 
+JNI_LIBS_PATH=./../app/src/main/jniLibs/${ANDROID_ABI}/
+
 
 install_ndk() {
     wget https://dl.google.com/android/repository/android-ndk-r26b-linux.zip
-    sudo unzip ./android-ndk-r26b-linux.zip -d /opt
+    sudo unzip ./android-ndk-r26b-linux.zip
 }
 
 build_openssl() {
