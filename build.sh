@@ -15,13 +15,13 @@ BUILD_ALL=${BUILD_ALL:-0}
 LIBGI2_DIR=${LIBGI2_DIR:-"$(pwd)"}
 OPENSSL_DIR="${LIBGI2_DIR}/openssl"
 LIBSSH2_DIR="${LIBGI2_DIR}/libssh2"
-export ANDROID_NDK_ROOT="${LIBGI2_DIR}/android-ndk-r26b"
-JNI_LIBS_PATH="../app/src/main/jniLibs/${ANDROID_ABI}"
 
+export ANDROID_NDK_ROOT=${ANDROID_NDK_ROOT:-"${LIBGI2_DIR}/android-ndk-r26b"}
+JNI_LIBS_PATH=${JNI_LIBS_PATH:-"../src/main/jniLibs/${ANDROID_ABI}"}
 
 install_ndk() {
-    wget "https://dl.google.com/android/repository/android-ndk-r26b-linux.zip" > /dev/null
-    unzip ./android-ndk-r26b-linux.zip > /dev/null
+    wget "https://dl.google.com/android/repository/android-ndk-r26b-linux.zip" > /dev/null 2>&1
+    unzip ./android-ndk-r26b-linux.zip > /dev/null 2>&1
 }
 
 build_openssl() {
@@ -109,7 +109,7 @@ copy_libs() {
 
 
 if [ "$BUILD_ALL" -eq 1 ]; then
-    install_ndk
+    # install_ndk
     build_openssl
     build_libssh2
     build_libgit2
