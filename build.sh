@@ -11,6 +11,7 @@ set -xe
 ANDROID_ABI=${ANDROID_ABI:-"arm64-v8a"}
 ANDROID_API=${ANDROID_API:-34}
 BUILD_ALL=${BUILD_ALL:-0}
+INSTALL_NDK=${INSTALL_NDK:-0}
 
 LIBGI2_DIR=${LIBGI2_DIR:-"$(pwd)"}
 OPENSSL_DIR="${LIBGI2_DIR}/openssl"
@@ -109,7 +110,11 @@ copy_libs() {
 
 
 if [ "$BUILD_ALL" -eq 1 ]; then
-    # install_ndk
+
+    if [ "$INSTALL_NDK" -eq 1 ]; then
+        install_ndk
+    fi
+
     build_openssl
     build_libssh2
     build_libgit2
