@@ -1,4 +1,4 @@
-#/bin/bash -xe
+#/bin/bash
 
 # build libgit2
 #
@@ -6,6 +6,7 @@
 # ANDROID_API: 34
 # BUILD_ALL: 0 or 1
 
+set -xe
 
 ANDROID_ABI=${ANDROID_ABI:-"arm64-v8a"}
 ANDROID_API=${ANDROID_API:-34}
