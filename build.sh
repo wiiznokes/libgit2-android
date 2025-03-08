@@ -48,7 +48,7 @@ build_openssl() {
     esac
 
     ./Configure $ANDROID_ABI_OPENSSL -D__ANDROID_API__=$ANDROID_API
-    make
+    make > /dev/null
 }
 
 build_libssh2() {
@@ -61,7 +61,7 @@ build_libssh2() {
     -DOPENSSL_INCLUDE_DIR=${OPENSSL_DIR}/include \
     -DOPENSSL_CRYPTO_LIBRARY=${OPENSSL_DIR}/libcrypto.so \
     -DOPENSSL_SSL_LIBRARY=${OPENSSL_DIR}/libssl.so
-    cmake --build .
+    cmake --build . > /dev/null
 }
 
 
@@ -87,7 +87,7 @@ build_libgit2() {
     -DUSE_SSH=ON \
     -DLIBSSH2_LIBRARY=${LIBSSH2_DIR}/build/src/libssh2.so \
     -DLIBSSH2_INCLUDE_DIR=${LIBSSH2_DIR}/include
-    cmake --build .
+    cmake --build . > /dev/null
 }
 
 copy_libs() {
