@@ -28,6 +28,8 @@ build_libgit2
 copy_libs $output_path
 ```
 
+result
+
 ```
 ls ./app/src/main/jniLibs/arm64-v8a/
 libcrypto.so  libgit2.so  libssh2.so  libssl.so
@@ -40,15 +42,3 @@ libcrypto.so  libgit2.so  libssh2.so  libssl.so
 - armeabi-v7a
 - x86
 - x86_64
-
-
-Can you write a bash script that take a variable $ANDROID_ABI
-and set a variable ANDROID_ABI_OPENSSL like this :
-
-$ANDROID_ABI -> $ANDROID_ABI_OPENSSL
-- arm64-v8a -> android-arm64
-- armeabi-v7a -> android-arm
-- x86 -> android-x86
-- x86_64 -> android-x86_64
-
-export ANDROID_ABI=x86_64
