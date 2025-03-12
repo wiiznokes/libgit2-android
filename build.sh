@@ -12,6 +12,7 @@ ANDROID_ABI=${ANDROID_ABI:-"arm64-v8a"}
 ANDROID_API=${ANDROID_API:-34}
 BUILD_ALL=${BUILD_ALL:-0}
 INSTALL_NDK=${INSTALL_NDK:-0}
+CLEAN=${CLEAN:-0}
 
 LIBGI2_DIR=${LIBGI2_DIR:-"$(pwd)"}
 OPENSSL_DIR="${LIBGI2_DIR}/openssl"
@@ -108,11 +109,28 @@ copy_libs() {
     echo "libgit2.so copied to $1"
 }
 
+clean() {
+    cd $OPENSSL_DIR
+    make clean
+    
+    cd $LIBSSH2_DIR
+    make clean
+    rm -r build
+    
+    cd $LIBGI2_DIR
+    make clean
+    rm -r build
+}
+
 
 if [ "$BUILD_ALL" -eq 1 ]; then
 
     if [ "$INSTALL_NDK" -eq 1 ]; then
         install_ndk
+    fi
+
+    if [ "$CLEAN" -eq 1 ]; then
+        clean
     fi
 
     build_openssl
