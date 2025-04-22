@@ -117,7 +117,6 @@ clean() {
     rm -r build
     
     cd $LIBGI2_DIR
-    make clean
     rm -r build
 }
 
