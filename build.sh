@@ -11,6 +11,7 @@ set -xe
 ANDROID_ABI=${ANDROID_ABI:-"arm64-v8a"}
 ANDROID_API=${ANDROID_API:-34}
 BUILD_ALL=${BUILD_ALL:-0}
+NDK_VERSION=${NDK_VERSION:-"r27c"}
 INSTALL_NDK=${INSTALL_NDK:-0}
 CLEAN=${CLEAN:-0}
 
@@ -18,12 +19,12 @@ LIBGI2_DIR=${LIBGI2_DIR:-"$(pwd)"}
 OPENSSL_DIR="${LIBGI2_DIR}/openssl"
 LIBSSH2_DIR="${LIBGI2_DIR}/libssh2"
 
-export ANDROID_NDK_ROOT=${ANDROID_NDK_ROOT:-"${LIBGI2_DIR}/android-ndk-r26b"}
+export ANDROID_NDK_ROOT=${ANDROID_NDK_ROOT:-"${LIBGI2_DIR}/android-ndk-${NDK_VERSION}"}
 JNI_LIBS_PATH=${JNI_LIBS_PATH:-"../src/main/jniLibs/${ANDROID_ABI}"}
 
 install_ndk() {
-    wget "https://dl.google.com/android/repository/android-ndk-r26b-linux.zip" > /dev/null 2>&1
-    unzip ./android-ndk-r26b-linux.zip > /dev/null 2>&1
+    wget "https://dl.google.com/android/repository/android-ndk-${NDK_VERSION}-linux.zip" > /dev/null 2>&1
+    unzip ./android-ndk-${NDK_VERSION}-linux.zip > /dev/null 2>&1
 }
 
 build_openssl() {
